@@ -3,40 +3,49 @@ package com.example.sogong;
 import com.google.gson.annotations.SerializedName;
 
 public class PostSending {
-    @SerializedName("userId")
-    private String userId;
-    @SerializedName("password")
-    private String password;
-    @SerializedName("email")
-    private String email;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("complete")
+    private boolean complete;
+    @SerializedName("important")
+    private boolean important;
 
-    public String getUserId() {
-        return userId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPassword() {
-        return password;
+    public boolean isComplete() {
+        return complete;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setComplete(boolean complete) {
+        this.complete = complete;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isImportant() {
+        return important;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setImportant(boolean important) {
+        this.important = important;
     }
 
-    public PostSending(String title, String description, String important){
-        this.userId = title;
-        this.password = description;
-        this.email = important;
+    public PostSending(String title, boolean complete, boolean important){
+        this.title = title;
+        this.complete = complete;
+        this.important = important;
     }
+    @Override
+    public String toString() {
+        return "PostResult{" +
+                ", title='" + title + '\'' +
+                ", complete='" + complete + '\'' +
+                ", important='" + important + '\'' +
+                '}';
+    }
+
 }

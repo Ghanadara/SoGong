@@ -1,10 +1,10 @@
 package com.example.sogong;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -14,31 +14,34 @@ public interface RetrofitService {
 
     // @GET( EndPoint-자원위치(URI) )
     //가져오기
-    @GET("{post}")
-    Call<PostResult> getPosts(@Path("post") String post);
+    @GET("todo/{post}")
+    Call<PostSending> getPosts(@Path("post") String post);
+
+    @GET("todo/")
+    Call<List<PostSending>> getAllPosts();
 
 
     //등록
-    @POST("register/")
+    @POST("todo/")
     Call<PostSending> setPostBody(@Body PostSending post);
 
-    @FormUrlEncoded
-    @POST("todo")
-    Call<PostSending> setPostField(
-            @Field("title") String title,
-            @Field("description") String description,
-            @Field("important") boolean important
-
-    );
+//    @FormUrlEncoded
+//    @POST("todo")
+//    Call<PostSending> setPostField(
+//            @Field("title") String title,
+//            @Field("description") String description,
+//            @Field("important") boolean important
+//
+//    );
 
     //수정
     @PUT("todo/{id}")
-    Call<PostResult> getPutBody(
+    Call<PostSending> getPutBody(
             @Path("id") String id,
-            @Body PostResult postResult
+            @Body PostSending PostSending
     );
 
     //삭제
     @DELETE("todo/{id}")
-    Call<Void> deletePost(@Path("id") int id);
+    Call<Void> deletePost(@Path("id") String id);
 }
