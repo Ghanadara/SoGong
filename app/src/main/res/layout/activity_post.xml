@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="제목을 입력하세요."
+            android:privateImeOptions="defaultInputmode=korean"
             />
     </LinearLayout>
 

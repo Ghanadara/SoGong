@@ -1,5 +1,6 @@
 package com.example.sogong;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PostActivity extends AppCompatActivity {
 
@@ -40,8 +45,33 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 // 게시물 등록 함수
-                RegBoard regBoard = new RegBoard();
-                regBoard.execute(userid, title_et.getText().toString(), content_et.getText().toString());
+//                RegBoard regBoard = new RegBoard();
+//                regBoard.execute(userid, title_et.getText().toString(), content_et.getText().toString());
+
+                RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
+
+                PostSending postSending = new PostSending(title_et.getText().toString(), true, true);
+                Call<PostSending> call = retrofitService.setPostBody(postSending);
+                call.enqueue(new Callback<PostSending>() {
+                    @Override
+                    public void onResponse(Call<PostSending> call, Response<PostSending> response) {
+                        if (response.isSuccessful()) {
+                            PostSending postresponse = response.body();
+                            Log.d("성공", postresponse.getTitle());
+                        } else {
+                            Log.d("실패", title_et.getText().toString() + "김재환 실패");
+                            return;
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<PostSending> call, Throwable t) {
+                        Log.d(TAG, "onFailure" + t.getMessage());
+                    }
+                });
+                Intent intent = new Intent(PostActivity.this, ListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -85,56 +115,9 @@ public class PostActivity extends AppCompatActivity {
 
             String response = "";
 
-            Server.addPost(userid,title,content);
+            Server.addPost(userid, title, content);
             response += "success";
 
-
-//            String server_url = "http://15.164.252.136/reg_board.php";
-//
-//
-//            URL url;
-//            String response = "";
-//            try {
-//                url = new URL(server_url);
-//
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setReadTimeout(15000);
-//                conn.setConnectTimeout(15000);
-//                conn.setRequestMethod("POST");
-//                conn.setDoInput(true);
-//                conn.setDoOutput(true);
-//                Uri.Builder builder = new Uri.Builder()
-//                        .appendQueryParameter("userid", userid)
-//                        .appendQueryParameter("title", title)
-//                        .appendQueryParameter("content", content);
-//                String query = builder.build().getEncodedQuery();
-//
-//                OutputStream os = conn.getOutputStream();
-//                BufferedWriter writer = new BufferedWriter(
-//                        new OutputStreamWriter(os, "UTF-8"));
-//                writer.write(query);
-//                writer.flush();
-//                writer.close();
-//                os.close();
-//
-//                conn.connect();
-//                int responseCode=conn.getResponseCode();
-//
-//                if (responseCode == HttpsURLConnection.HTTP_OK) {
-//                    String line;
-//                    BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//                    while ((line=br.readLine()) != null) {
-//                        response+=line;
-//                    }
-//                }
-//                else {
-//                    response="";
-//
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
             return response;
         }
     }

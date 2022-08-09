@@ -4,22 +4,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-//히히 너무 재밌다
 public class LoginActivity extends AppCompatActivity {
 
     // 로그에 사용할 TAG 변수 선언
@@ -40,52 +32,44 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);
 
+// 사용할 컴포넌트 초기화
+        userid_et = findViewById(R.id.userid_et);
+        passwd_et = findViewById(R.id.passwd_et);
+        login_button = findViewById(R.id.login_button);
+        join_button = findViewById(R.id.join_button);
 
+// 로그인 버튼 이벤트 추가
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+// 로그인 함수
+                LoginTask loginTask = new LoginTask();
+                loginTask.execute(userid_et.getText().toString(), passwd_et.getText().toString());
+            }
+        });
 
-
-        /*test 용 나중에 삭제할 것*/
-        setContentView(R.layout.activity_postlist);
-        recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-
-
-//
-//// 사용할 컴포넌트 초기화
-//        userid_et = findViewById(R.id.userid_et);
-//        passwd_et = findViewById(R.id.passwd_et);
-//        login_button = findViewById(R.id.login_button);
-//        join_button = findViewById(R.id.join_button);
-//
-//// 로그인 버튼 이벤트 추가
-//        login_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//// 로그인 함수
-//                LoginTask loginTask = new LoginTask();
-//                loginTask.execute(userid_et.getText().toString(), passwd_et.getText().toString());
-//            }
-//        });
-//
-//// 조인 버튼 이벤트 추가
-//        join_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+// 조인 버튼 이벤트 추가
+        join_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, JoinActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         //서버 데이터 가져오기
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://todo-drf-testone.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+//        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://todo-drf-testone.herokuapp.com/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        service1 = retrofit.create(RetrofitService.class);
 
-        service1 = retrofit.create(RetrofitService.class);
+        //retrofitservice를 클래스로 만듦. 양식은 다음과 같다.
+//        RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
+//        Call<PostSending> call = retrofitService.getPosts("1");
 
         //delete
 //        Call<Void> call = service1.deletePost("3");
@@ -104,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 //        });
 
 
-        //put 약간 구현... title과 important는 수정됐지만 complete는 수정 안 됨
+        //put 약간 구현... title과 important는 수정됐지만 complete는 수정 안 됨. 백엔드가 하겠지~~
 //        PostSending postSending = new PostSending("김재환_수정됨",true,true);
 //        Call<PostSending> call = service1.getPutBody("3",postSending);
 //        call.enqueue(new Callback<PostSending>() {
@@ -145,28 +129,28 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //all get 구현
-        Call<List<PostSending>> call = service1.getAllPosts();
-        call.enqueue(new Callback<List<PostSending>>() {
-            @Override
-            public void onResponse(Call<List<PostSending>> call, Response<List<PostSending>> response) {
-                if(response.isSuccessful()){
-                    List<PostSending> posts = response.body();
-                    for(PostSending postSending : posts){
-                        Log.d("성공",postSending.getTitle());
-                    }
-                    recyclerAdapter = new RecyclerAdapter(getApplicationContext(), posts);
-                    recyclerView.setAdapter(recyclerAdapter);
-                }else {
-                    Log.d("실패","김재환 실패");
-                    return;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PostSending>> call, Throwable t) {
-
-            }
-        });
+//        Call<List<PostSending>> call = service1.getAllPosts();
+//        call.enqueue(new Callback<List<PostSending>>() {
+//            @Override
+//            public void onResponse(Call<List<PostSending>> call, Response<List<PostSending>> response) {
+//                if(response.isSuccessful()){
+//                    List<PostSending> posts = response.body();
+//                    for(PostSending postSending : posts){
+//                        Log.d("성공",postSending.getTitle());
+//                    }
+//                    recyclerAdapter = new RecyclerAdapter(getApplicationContext(), posts);
+//                    recyclerView.setAdapter(recyclerAdapter);
+//                }else {
+//                    Log.d("실패","김재환 실패");
+//                    return;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PostSending>> call, Throwable t) {
+//
+//            }
+//        });
 
 
         //Post 구현
