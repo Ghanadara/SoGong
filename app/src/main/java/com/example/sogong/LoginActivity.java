@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class LoginActivity extends AppCompatActivity {
 
     // 로그에 사용할 TAG 변수 선언
@@ -20,15 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     // 사용할 컴포넌트 선언
     EditText userid_et, passwd_et;
     Button login_button, join_button;
-
-    RetrofitService service1;
-
-    /*test 용 나중에 삭제할 것*/
-    RecyclerView recyclerView;
-    RecyclerAdapter recyclerAdapter;
-
-
-
+    TextInputLayout textInputLayout2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         passwd_et = findViewById(R.id.passwd_et);
         login_button = findViewById(R.id.login_button);
         join_button = findViewById(R.id.join_button);
+        textInputLayout2 = findViewById(R.id.textInputLayout2);
 
 // 로그인 버튼 이벤트 추가
         login_button.setOnClickListener(new View.OnClickListener() {
@@ -201,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("userid", userid_et.getText().toString());
                 startActivity(intent);
             } else if (result.equals("fail")) {
+                textInputLayout2.setError("로그인실패ㅂㅈ");
                 Toast.makeText(LoginActivity.this, "잘못된 정보입니다.", Toast.LENGTH_SHORT).show();
             }
         }

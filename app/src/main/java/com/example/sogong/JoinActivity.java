@@ -15,7 +15,7 @@ public class JoinActivity extends AppCompatActivity {
     final private String TAG = getClass().getSimpleName();
 
     // 사용할 컴포넌트 선언
-    EditText userid_et, passwd_et;
+    EditText userid_et, passwd_et, passwdcheck_et;
     Button join_button;
 
     @Override
@@ -26,6 +26,7 @@ public class JoinActivity extends AppCompatActivity {
 // 컴포넌트 초기화
         userid_et = findViewById(R.id.userid_et);
         passwd_et = findViewById(R.id.passwd_et);
+        passwdcheck_et = findViewById(R.id.passwdcheck_et);
         join_button = findViewById(R.id.join_button);
 
 // 버튼 이벤트 추가
