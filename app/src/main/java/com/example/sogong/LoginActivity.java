@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Server.addUser("123","123");//root계정
 // 사용할 컴포넌트 초기화
         userid_et = findViewById(R.id.userid_et);
         passwd_et = findViewById(R.id.passwd_et);
@@ -196,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("userid", userid_et.getText().toString());
                 startActivity(intent);
             } else if (result.equals("fail")) {
-                textInputLayout2.setError("로그인실패ㅂㅈ");
+                textInputLayout2.setError("로그인실패");
                 Toast.makeText(LoginActivity.this, "잘못된 정보입니다.", Toast.LENGTH_SHORT).show();
             }
         }

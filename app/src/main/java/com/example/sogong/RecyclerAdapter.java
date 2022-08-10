@@ -11,10 +11,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
     private Context c;
     private List<PostSending> PostList;
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position);
+    }
+
+    private OnItemClickListener mListener = null;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
+    }
 
     public RecyclerAdapter(Context c, List<PostSending> PostList) {
         this.c = c;
@@ -52,9 +62,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title = (TextView)itemView.findViewById(R.id.title);
-            complete = (TextView)itemView.findViewById(R.id.complete);
-            important = (TextView)itemView.findViewById(R.id.important);
+            title = (TextView) itemView.findViewById(R.id.title);
+            complete = (TextView) itemView.findViewById(R.id.complete);
+            important = (TextView) itemView.findViewById(R.id.important);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAbsoluteAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onItemClick(view, pos);
+                        }
+                        //PostSending post  = PostList.get(pos);
+                    }
+
+                }
+            });
 
         }
     }
