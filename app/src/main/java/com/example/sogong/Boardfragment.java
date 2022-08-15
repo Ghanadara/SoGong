@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+//ㅁㅁ
 public class Boardfragment extends Fragment {
     private static final String TAG = "Boardfragment";
     private RecyclerView postrecyclerView;
