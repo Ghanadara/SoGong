@@ -15,15 +15,15 @@ public interface RetrofitService {
     // @GET( EndPoint-자원위치(URI) )
     //가져오기
     @GET("todo/{post}")
-    Call<PostSending> getPosts(@Path("post") String post);
+    Call<PostObject> getPosts(@Path("post") String post);
 
     @GET("todo/")
-    Call<List<PostSending>> getAllPosts();
+    Call<List<PostObject>> getAllPosts();
 
 
     //등록
     @POST("todo/")
-    Call<PostSending> setPostBody(@Body PostSending post);
+    Call<PostObject> setPostBody(@Body PostObject post);
 
 //    @FormUrlEncoded
 //    @POST("todo")
@@ -36,9 +36,9 @@ public interface RetrofitService {
 
     //수정
     @PUT("todo/{id}")
-    Call<PostSending> getPutBody(
+    Call<PostObject> getPutBody(
             @Path("id") String id,
-            @Body PostSending PostSending
+            @Body PostObject PostObject
     );
 
     //삭제

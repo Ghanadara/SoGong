@@ -2,7 +2,7 @@ package com.example.sogong;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PostSending {
+public class PostObject {
     @SerializedName("title")
     private String title;
     @SerializedName("complete")
@@ -34,7 +34,7 @@ public class PostSending {
         this.important = important;
     }
 
-    public PostSending(String title, boolean complete, boolean important){
+    public PostObject(String title, boolean complete, boolean important){
         this.title = title;
         this.complete = complete;
         this.important = important;

@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     private Context c;
-    private List<PostSending> PostList;
+    private List<PostObject> PostList;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -26,21 +26,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         this.mListener = listener;
     }
 
-    public RecyclerAdapter(Context c, List<PostSending> PostList) {
+    public PostAdapter(Context c, List<PostObject> PostList) {
         this.c = c;
         this.PostList = PostList;
     }
 
     @NonNull
     @Override
-    public RecyclerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PostAdapter.PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(c).inflate(R.layout.recycler_item, parent, false);
-        return new MyViewHolder(view);
+        View view = LayoutInflater.from(c).inflate(R.layout.recycler_boardlist, parent, false);
+        return new PostHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostAdapter.PostHolder holder, int position) {
 
         holder.title.setText(PostList.get(position).getTitle());
         holder.complete.setText(String.valueOf(PostList.get(position).isComplete()));
@@ -53,13 +53,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return PostList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class PostHolder extends RecyclerView.ViewHolder {
 
         TextView title;
         TextView complete;
         TextView important;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public PostHolder(@NonNull View itemView) {
             super(itemView);
 
             title = (TextView) itemView.findViewById(R.id.title);

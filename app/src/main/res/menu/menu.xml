@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_board_fragment"
+        android:enabled="true"
+        android:icon="@android:drawable/stat_notify_chat"
+        android:title="게시판" />
+    <item
+        android:id="@+id/item_writeactivity"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="게시글 작성" />
+    <item
+        android:id="@+id/item_profile_fragment"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="프로필" />
+
+</menu>

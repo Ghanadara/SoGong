@@ -50,23 +50,23 @@ public class PostActivity extends AppCompatActivity {
 
                 RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
 
-                PostSending postSending = new PostSending(title_et.getText().toString(), true, true);
-                Call<PostSending> call = retrofitService.setPostBody(postSending);
-                call.enqueue(new Callback<PostSending>() {
+                PostObject postObject = new PostObject(title_et.getText().toString(), true, true);
+                Call<PostObject> call = retrofitService.setPostBody(postObject);
+                call.enqueue(new Callback<PostObject>() {
                     @Override
-                    public void onResponse(Call<PostSending> call, Response<PostSending> response) {
+                    public void onResponse(Call<PostObject> call, Response<PostObject> response) {
                         if (response.isSuccessful()) {
-                            PostSending postresponse = response.body();
+                            PostObject postresponse = response.body();
                             Log.d("성공", postresponse.getTitle());
                         } else {
-                            Log.d("실패", title_et.getText().toString() + "김재환 실패");
+                            Log.d("실패", title_et.getText().toString() + "post 실패");
                             return;
                         }
 
                     }
 
                     @Override
-                    public void onFailure(Call<PostSending> call, Throwable t) {
+                    public void onFailure(Call<PostObject> call, Throwable t) {
                         Log.d(TAG, "onFailure" + t.getMessage());
                     }
                 });
