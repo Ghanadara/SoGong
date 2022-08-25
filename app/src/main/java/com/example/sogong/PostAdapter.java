@@ -43,8 +43,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
     public void onBindViewHolder(@NonNull PostAdapter.PostHolder holder, int position) {
 
         holder.title.setText(PostList.get(position).getTitle());
-        holder.complete.setText(String.valueOf(PostList.get(position).isComplete()));
-        holder.important.setText(String.valueOf(PostList.get(position).isImportant()));
+        holder.complete.setText(PostList.get(position).getAuthor());
+        holder.important.setText(PostList.get(position).getCategory());
 
     }
 

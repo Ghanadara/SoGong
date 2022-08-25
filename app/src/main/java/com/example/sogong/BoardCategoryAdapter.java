@@ -14,7 +14,7 @@ public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdap
     private ClickCallbackListener callbackListener;
     private boolean[] is_checked;
 
-    public static interface OnItemClickListener {
+    public  interface OnItemClickListener {
         public void onItemClick(RecyclerView.ViewHolder holder, View v, int pos);
     }
 
@@ -60,7 +60,7 @@ public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdap
             this.callbackListener = callbackListener;
         }
 
-        public void setOnItemClicklListener(OnItemClickListener listener) {
+        public void setOnItemClickListener(OnItemClickListener listener) {
             this.listener = listener;
         }
     }
@@ -85,7 +85,7 @@ public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdap
     public void onBindViewHolder(@NonNull BoardCategoryHolder holder, int position) {
         holder.onBind(category[position], callbackListener);
 
-        holder.setOnItemClicklListener(mListener);
+        holder.setOnItemClickListener(mListener);
     }
 
     @Override

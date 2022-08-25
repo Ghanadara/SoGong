@@ -48,28 +48,28 @@ public class PostActivity extends AppCompatActivity {
 //                RegBoard regBoard = new RegBoard();
 //                regBoard.execute(userid, title_et.getText().toString(), content_et.getText().toString());
 
-                RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
-
-                PostObject postObject = new PostObject(title_et.getText().toString(), true, true);
-                Call<PostObject> call = retrofitService.setPostBody(postObject);
-                call.enqueue(new Callback<PostObject>() {
-                    @Override
-                    public void onResponse(Call<PostObject> call, Response<PostObject> response) {
-                        if (response.isSuccessful()) {
-                            PostObject postresponse = response.body();
-                            Log.d("성공", postresponse.getTitle());
-                        } else {
-                            Log.d("실패", title_et.getText().toString() + "post 실패");
-                            return;
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<PostObject> call, Throwable t) {
-                        Log.d(TAG, "onFailure" + t.getMessage());
-                    }
-                });
+//                RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
+//
+//                PostObject postObject = new PostObject(title_et.getText().toString(), true, true);
+//                Call<PostObject> call = retrofitService.setPostBody(postObject);
+//                call.enqueue(new Callback<PostObject>() {
+//                    @Override
+//                    public void onResponse(Call<PostObject> call, Response<PostObject> response) {
+//                        if (response.isSuccessful()) {
+//                            PostObject postresponse = response.body();
+//                            Log.d("성공", postresponse.getTitle());
+//                        } else {
+//                            Log.d("실패", title_et.getText().toString() + "post 실패");
+//                            return;
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<PostObject> call, Throwable t) {
+//                        Log.d(TAG, "onFailure" + t.getMessage());
+//                    }
+//                });
                 Intent intent = new Intent(PostActivity.this, ListActivity.class);
                 startActivity(intent);
             }

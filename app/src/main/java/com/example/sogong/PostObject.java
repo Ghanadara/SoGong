@@ -3,12 +3,26 @@ package com.example.sogong;
 import com.google.gson.annotations.SerializedName;
 
 public class PostObject {
+    @SerializedName("postUser")
+    private int postUser;
     @SerializedName("title")
     private String title;
-    @SerializedName("complete")
-    private boolean complete;
-    @SerializedName("important")
-    private boolean important;
+    @SerializedName("author")
+    private String author;
+    @SerializedName("time")
+    private String time;
+    @SerializedName("category")
+    private String category;
+    @SerializedName("views")
+    private String views;
+
+    public int getPostUser() {
+        return postUser;
+    }
+
+    public void setPostUser(int postUser) {
+        this.postUser = postUser;
+    }
 
     public String getTitle() {
         return title;
@@ -18,33 +32,56 @@ public class PostObject {
         this.title = title;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public boolean isImportant() {
-        return important;
+    public String getTime() {
+        return time;
     }
 
-    public void setImportant(boolean important) {
-        this.important = important;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public PostObject(String title, boolean complete, boolean important){
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getViews() {
+        return views;
+    }
+
+    public void setViews(String views) {
+        this.views = views;
+    }
+
+    public PostObject(int postUser, String title, String author, String time, String category, String views) {
+        this.postUser = postUser;
         this.title = title;
-        this.complete = complete;
-        this.important = important;
+        this.author = author;
+        this.time = time;
+        this.category = category;
+        this.views = views;
     }
+
     @Override
     public String toString() {
-        return "PostResult{" +
+        return "PostObject{" +
+                "postUser=" + postUser +
                 ", title='" + title + '\'' +
-                ", complete='" + complete + '\'' +
-                ", important='" + important + '\'' +
+                ", author='" + author + '\'' +
+                ", time='" + time + '\'' +
+                ", category='" + category + '\'' +
+                ", views='" + views + '\'' +
                 '}';
     }
 

@@ -1,16 +1,24 @@
 package com.example.sogong;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -36,14 +44,14 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_postlist);
         /*test 용 나중에 삭제할 것*/
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
 
-//        recyclerView = findViewById(R.id.recyclerView);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
 // LoginActivity 에서 넘긴 userid 값 받기
         userid = getIntent().getStringExtra("userid");
@@ -68,20 +76,20 @@ public class ListActivity extends AppCompatActivity {
 //            }
 //        });
 
-//// 버튼 컴포넌트 초기화
-//        reg_button = findViewById(R.id.reg_button);
-//
-//// 버튼 이벤트 추가
-//        reg_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//// userid 를 가지고 PostActivity 로 이동
-//                Intent intent = new Intent(ListActivity.this, PostActivity.class);
-//                intent.putExtra("userid", userid);
-//                startActivity(intent);
-//            }
-//        });
+// 버튼 컴포넌트 초기화
+        reg_button = findViewById(R.id.reg_button);
+
+// 버튼 이벤트 추가
+        reg_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+// userid 를 가지고 PostActivity 로 이동
+                Intent intent = new Intent(ListActivity.this, PostActivity.class);
+                intent.putExtra("userid", userid);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -89,29 +97,29 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
-//        Call<List<PostObject>> call = retrofitService.getAllPosts();
-//        call.enqueue(new Callback<List<PostObject>>() {
-//            @Override
-//            public void onResponse(Call<List<PostObject>> call, Response<List<PostObject>> response) {
-//                if(response.isSuccessful()){
-//                    List<PostObject> posts = response.body();
-//                    for(PostObject postObject : posts){
-//                        Log.d("성공", postObject.getTitle());
-//                    }
-//                    postAdapter = new PostAdapter(getApplicationContext(), posts);
-//                    recyclerView.setAdapter(postAdapter);
-//                }else {
-//                    Log.d("실패","김재환 실패");
-//                    return;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<PostObject>> call, Throwable t) {
-//                Log.d("실패","김재환 실패");
-//            }
-//        });
+        RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
+        Call<List<PostObject>> call = retrofitService.getAllPosts();
+        call.enqueue(new Callback<List<PostObject>>() {
+            @Override
+            public void onResponse(Call<List<PostObject>> call, Response<List<PostObject>> response) {
+                if(response.isSuccessful()){
+                    List<PostObject> posts = response.body();
+                    for(PostObject postObject : posts){
+                        Log.d("성공", postObject.getTitle());
+                    }
+                    postAdapter = new PostAdapter(getApplicationContext(), posts);
+                    recyclerView.setAdapter(postAdapter);
+                }else {
+                    Log.d("실패","김재환 실패");
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<PostObject>> call, Throwable t) {
+                Log.d("실패","김재환 실패");
+            }
+        });
 
 //// 해당 액티비티가 활성화 될 때, 게시물 리스트를 불러오는 함수를 호출
 //        GetBoard getBoard = new GetBoard();
