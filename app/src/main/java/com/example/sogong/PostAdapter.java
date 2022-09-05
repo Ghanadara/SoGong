@@ -14,10 +14,10 @@ import java.util.List;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     private Context c;
-    private List<PostObject> PostList;
+    private static List<PostObject> PostList;
 
     public interface OnItemClickListener {
-        void onItemClick(View v, int position);
+        void onItemClicked(View v, int position);
     }
 
     private OnItemClickListener mListener = null;
@@ -72,7 +72,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
                     int pos = getAbsoluteAdapterPosition();
                     if (pos != RecyclerView.NO_POSITION) {
                         if (mListener != null) {
-                            mListener.onItemClick(view, pos);
+                            mListener.onItemClicked(view, pos);
                         }
                         //PostSending post  = PostList.get(pos);
                     }
@@ -81,5 +81,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
             });
 
         }
+    }
+    public static PostObject getItem(int position){
+        return PostList.get(position);
     }
 }

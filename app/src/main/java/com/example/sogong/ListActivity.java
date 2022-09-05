@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,7 +39,6 @@ public class ListActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     PostAdapter postAdapter;
-
 
 
     @Override
@@ -90,6 +90,7 @@ public class ListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -102,28 +103,38 @@ public class ListActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<PostObject>>() {
             @Override
             public void onResponse(Call<List<PostObject>> call, Response<List<PostObject>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     List<PostObject> posts = response.body();
-                    for(PostObject postObject : posts){
+                    for (PostObject postObject : posts) {
                         Log.d("성공", postObject.getTitle());
                     }
                     postAdapter = new PostAdapter(getApplicationContext(), posts);
                     recyclerView.setAdapter(postAdapter);
-                }else {
-                    Log.d("실패","김재환 실패");
+                } else {
+                    Log.d("실패", "김재환 실패");
                     return;
                 }
             }
 
             @Override
             public void onFailure(Call<List<PostObject>> call, Throwable t) {
-                Log.d("실패","김재환 실패");
+                Log.d("실패", "김재환 실패");
             }
+
         });
 
 //// 해당 액티비티가 활성화 될 때, 게시물 리스트를 불러오는 함수를 호출
 //        GetBoard getBoard = new GetBoard();
 //        getBoard.execute();
+        postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClicked(View v, int position) {
+                PostObject item = PostAdapter.getItem(position);
+                Toast.makeText(getApplicationContext(),"postiion" + position +"제목" +item.getTitle(),Toast.LENGTH_LONG).show();
+            }
+        });
+        recyclerView.setAdapter(postAdapter);
+
     }
 
 
@@ -151,13 +162,13 @@ public class ListActivity extends AppCompatActivity {
             //JSONArray jsonArray = new JSONArray(result);
             ArrayList<Post> postArrayList = Server.getPostlist();
 
-            for(int i = 0; i<postArrayList.size();i++){
+            for (int i = 0; i < postArrayList.size(); i++) {
                 String title = postArrayList.get(i).getTitle();
-                String seq =  Integer.toString(i);
+                String seq = Integer.toString(i);
 
                 titleList.add(title);
                 seqList.add(seq);
-                Log.d(TAG,title+" 추가");
+                Log.d(TAG, title + " 추가");
             }
 
 

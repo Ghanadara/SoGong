@@ -20,10 +20,16 @@ public interface RetrofitService {
     @GET("board/")
     Call<List<PostObject>> getAllPosts();
 
+    @GET("login/{uid}")
+    Call<LoginObject> getLogin(@Path("uid") String uid);
+
 
     //등록
     @POST("board/")
     Call<PostObject> setPostBody(@Body PostObject post);
+
+    @POST("login/")
+    Call<LoginObject> setLoginBody(@Body LoginObject loginObject);
 
 //    @FormUrlEncoded
 //    @POST("todo")

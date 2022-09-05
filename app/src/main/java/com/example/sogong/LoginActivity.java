@@ -13,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     // 로그에 사용할 TAG 변수 선언
@@ -22,12 +28,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText userid_et, passwd_et;
     Button login_button, join_button;
     TextInputLayout textInputLayout2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Server.addUser("123","123");//root계정
+        Server.addUser("123", "123");//root계정
 // 사용할 컴포넌트 초기화
         userid_et = findViewById(R.id.userid_et);
         passwd_et = findViewById(R.id.passwd_et);
@@ -208,13 +215,39 @@ public class LoginActivity extends AppCompatActivity {
             String userid = params[0];
             String passwd = params[1];
 
-            String response = "";
-            if (Server.findUser(userid, passwd)) {
-                response += "success";
-            } else {
-                response += "fail";
-            }
-            return response;
+            //final String[] result = {""};
+
+            RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
+            Call<LoginObject> call = retrofitService.getLogin(userid);
+            call.enqueue(new Callback<LoginObject>() {
+                @Override
+                public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                    String result = "";
+                    if (response.isSuccessful()) {
+                        LoginObject loginObject = response.body();
+                        Log.d("성공", loginObject.getUserId());
+                        if (passwd.equals(loginObject.getPassword())) {
+                            Log.d("성공", "비밀번호 일치");
+                            result = "success";
+                        } else {
+                            Log.d("실패", "비밀번호 불일치");
+                            result += "fail";
+
+                        } ;
+
+                    } else {
+                        Log.d("실패", "없는 사용자 아이디 입니다.");
+                        result += "fail";
+                        return;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginObject> call, Throwable t) {
+
+                }
+            });
+            //return  result[0][0];
 
 //            String server_url = "http://15.164.252.136/login.php";
 //
