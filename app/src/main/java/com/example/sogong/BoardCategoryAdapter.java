@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdapter.BoardCategoryHolder> {
+    Context context;
     private String[] category;
     private ClickCallbackListener callbackListener;
     private boolean[] is_checked;
@@ -24,9 +25,9 @@ public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdap
         this.mListener = listener;
     }
 
-    BoardCategoryAdapter(String[] category, boolean[] is_checked) {
+    BoardCategoryAdapter(Context context,String[] category) {
+        this.context = context;
         this.category = category;
-        this.is_checked = is_checked;
     }
 
     public void setCallbackListener(ClickCallbackListener callbackListener) {

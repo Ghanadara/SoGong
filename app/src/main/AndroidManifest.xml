@@ -18,6 +18,7 @@
         <activity android:name=".PostActivity" />
         <activity android:name=".ListActivity" />
         <activity android:name=".JoinActivity" />
+        <activity android:name=".BoardListActivity" />
 
         <activity
             android:name=".LoginActivity"

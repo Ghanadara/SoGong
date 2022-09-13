@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,8 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListActivity extends AppCompatActivity {
-
+public class BoardListActivity extends AppCompatActivity {
     // 로그에 사용할 TAG 변수
     final private String TAG = getClass().getSimpleName();
 
@@ -30,6 +30,7 @@ public class ListActivity extends AppCompatActivity {
     ListView listView;
     Button reg_button;
     String userid = "";
+    String[] boardCategories =getResources().getStringArray(R.array.Boardcategory);
 
     // 리스트뷰에 사용할 제목 배열
     ArrayList<String> titleList = new ArrayList<>();
@@ -38,20 +39,23 @@ public class ListActivity extends AppCompatActivity {
     ArrayList<String> seqList = new ArrayList<>();
 
     RecyclerView recyclerView;
-    PostAdapter postAdapter;
+    BoardCategoryAdapter boardCategoryAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_postlist);
+        setContentView(R.layout.activity_main_test);
         /*test 용 나중에 삭제할 것*/
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
 
         recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+        boardCategoryAdapter = new BoardCategoryAdapter(getApplicationContext(),boardCategories);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+                LinearLayoutManager.VERTICAL));
+        recyclerView.setAdapter(boardCategoryAdapter);
 
 // LoginActivity 에서 넘긴 userid 값 받기
         userid = getIntent().getStringExtra("userid");
@@ -85,7 +89,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 // userid 를 가지고 PostActivity 로 이동
-                Intent intent = new Intent(ListActivity.this, PostActivity.class);
+                Intent intent = new Intent(BoardListActivity.this, PostActivity.class);
                 intent.putExtra("userid", userid);
                 startActivity(intent);
             }
@@ -98,42 +102,19 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RetrofitService retrofitService = RetrofitClient.getClient().create(RetrofitService.class);
-        Call<List<PostObject>> call = retrofitService.getAllPosts();
-        call.enqueue(new Callback<List<PostObject>>() {
-            @Override
-            public void onResponse(Call<List<PostObject>> call, Response<List<PostObject>> response) {
-                if (response.isSuccessful()) {
-                    List<PostObject> posts = response.body();
-                    for (PostObject postObject : posts) {
-                        Log.d("성공", postObject.getTitle());
-                    }
-                    postAdapter = new PostAdapter(getApplicationContext(), posts);
-                    recyclerView.setAdapter(postAdapter);
-                } else {
-                    Log.d("실패", "김재환 실패");
-                    return;
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<PostObject>> call, Throwable t) {
-                Log.d("실패", "김재환 실패");
-            }
-
-        });
 
 //// 해당 액티비티가 활성화 될 때, 게시물 리스트를 불러오는 함수를 호출
 //        GetBoard getBoard = new GetBoard();
 //        getBoard.execute();
-        postAdapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClicked(View v, int position) {
-                PostObject item = PostAdapter.getItem(position);
-                Toast.makeText(getApplicationContext(),"postiion" + position +"제목" +item.getTitle(),Toast.LENGTH_LONG).show();
-            }
-        });
-        recyclerView.setAdapter(postAdapter);
+//        boardCategoryAdapter.setOnItemClickListener(new BoardCategoryAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClicked(View v, int position) {
+//                PostObject item = PostAdapter.getItem(position);
+//                Toast.makeText(getApplicationContext(),"postiion" + position +"제목" +item.getTitle(),Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        recyclerView.setAdapter(boardCategoryAdapter);
 
     }
 
@@ -185,7 +166,7 @@ public class ListActivity extends AppCompatActivity {
 //                }
 
 // ListView 에서 사용할 arrayAdapter를 생성하고, ListView 와 연결
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(ListActivity.this, android.R.layout.simple_list_item_1, titleList);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(BoardListActivity.this, android.R.layout.simple_list_item_1, titleList);
             listView.setAdapter(arrayAdapter);
 
 // arrayAdapter의 데이터가 변경되었을때 새로고침

@@ -27,6 +27,7 @@
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_detail.xml" value="0.16510416666666666" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_login.xml" value="0.128125" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_main_test.xml" value="0.11145833333333334" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_post.xml" value="0.16510416666666666" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_postlist.xml" value="0.1" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/fragment_board.xml" value="0.264" />
@@ -35,6 +36,7 @@
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/recycler_boardlist.xml" value="0.176" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/recycler_items.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/menu/menu.xml" value="0.18425925925925926" />
+        <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/menu/menu_main.xml" value="0.1125" />
       </map>
     </option>
   </component>

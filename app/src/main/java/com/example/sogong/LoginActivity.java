@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
 // 토스트 메시지를 뿌리고
 // userid 값을 가지고 ListActivity 로 이동
                 Toast.makeText(LoginActivity.this, "로그인 되었습니다.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, ListActivity.class);
+                Intent intent = new Intent(LoginActivity.this, BoardListActivity.class);
                 intent.putExtra("userid", userid_et.getText().toString());
                 startActivity(intent);
             } else if (result.equals("fail")) {
@@ -238,7 +238,6 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Log.d("실패", "없는 사용자 아이디 입니다.");
                         result += "fail";
-                        return;
                     }
                 }
 
@@ -247,7 +246,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
-            //return  result[0][0];
+            String result = "success";
+            return  result;
 
 //            String server_url = "http://15.164.252.136/login.php";
 //
