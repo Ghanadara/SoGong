@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class LoginObject {
     @SerializedName("uid")
     private String UserId;
+    @SerializedName("nickname")
+    private String nickname;
     @SerializedName("password")
     private String password;
 
@@ -16,6 +18,14 @@ public class LoginObject {
         UserId = userId;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -24,8 +34,9 @@ public class LoginObject {
         this.password = password;
     }
 
-    public LoginObject(String userId, String password) {
-        UserId = userId;
+    public LoginObject(String userId, String nickname, String password) {
+        this.UserId = userId;
+        this.nickname = nickname;
         this.password = password;
     }
 
@@ -33,6 +44,7 @@ public class LoginObject {
     public String toString() {
         return "LoginObject{" +
                 "UserId='" + UserId + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

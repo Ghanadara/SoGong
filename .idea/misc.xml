@@ -32,7 +32,8 @@
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/activity_postlist.xml" value="0.1" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/fragment_board.xml" value="0.264" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/fragment_boardlist.xml" value="0.1" />
-        <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/item_boardcategory_selected.xml" value="0.1" />
+        <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/item_boardcategory_selected.xml" value="0.144" />
+        <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/item_boardcategory_unselected.xml" value="0.4" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/recycler_boardlist.xml" value="0.176" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/layout/recycler_items.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/rnjs1/AndroidStudioProjects/SoGong2/app/src/main/res/menu/menu.xml" value="0.18425925925925926" />

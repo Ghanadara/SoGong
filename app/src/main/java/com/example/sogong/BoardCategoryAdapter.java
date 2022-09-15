@@ -94,13 +94,13 @@ public class BoardCategoryAdapter extends RecyclerView.Adapter<BoardCategoryAdap
         return category.length;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (is_checked[position])
-            return 1;
-        else
-            return 0;
-    }
+//    @Override
+//    public int getItemViewType(int position) {
+//        if (is_checked[position])
+//            return 1;
+//        else
+//            return 0;
+//    }
     public String getItem(int position){
         return category[position];
     }

@@ -1,6 +1,7 @@
 package com.example.sogong;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,10 +29,8 @@ public class BoardListActivity extends AppCompatActivity {
 
     // 사용할 컴포넌트 선언
     ListView listView;
-    Button reg_button;
+    Button profile_button;
     String userid = "";
-    String[] boardCategories =getResources().getStringArray(R.array.Boardcategory);
-
     // 리스트뷰에 사용할 제목 배열
     ArrayList<String> titleList = new ArrayList<>();
 
@@ -49,12 +48,14 @@ public class BoardListActivity extends AppCompatActivity {
         /*test 용 나중에 삭제할 것*/
         //setContentView(R.layout.activity_main);
 
+        Resources resources = getResources();
+        String[] boardCategories =resources.getStringArray(R.array.Boardcategory);
 
         recyclerView = findViewById(R.id.recyclerView);
         boardCategoryAdapter = new BoardCategoryAdapter(getApplicationContext(),boardCategories);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-                LinearLayoutManager.VERTICAL));
+                LinearLayoutManager.HORIZONTAL));
         recyclerView.setAdapter(boardCategoryAdapter);
 
 // LoginActivity 에서 넘긴 userid 값 받기
@@ -81,10 +82,10 @@ public class BoardListActivity extends AppCompatActivity {
 //        });
 
 // 버튼 컴포넌트 초기화
-        reg_button = findViewById(R.id.reg_button);
+        profile_button = findViewById(R.id.profile_button);
 
 // 버튼 이벤트 추가
-        reg_button.setOnClickListener(new View.OnClickListener() {
+        profile_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
