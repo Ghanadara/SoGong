@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
+        android:layout_marginBottom="70dp"
         android:hint="비밀번호"
         app:boxStrokeErrorColor="@color/red_700"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,7 +103,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="500dp"
         android:text="아이디/비밀번호 찾기"
-        android:textStyle="bold"
         android:textSize="15sp"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -112,5 +112,19 @@
         app:layout_constraintVertical_bias="0.60">
 
     </Button>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자동로그인"
+        android:layout_marginRight="230dp"
+        android:layout_marginBottom="320dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,14 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_board_fragment"
+        android:id="@+id/item_Home_fragment"
         android:enabled="true"
         android:icon="@android:drawable/stat_notify_chat"
-        android:title="게시판" />
+        android:title="홈화면" />
     <item
-        android:id="@+id/item_profile_fragment"
+        android:id="@+id/item_recipe_fragment"
+        android:enabled="true"
+        android:icon="@android:drawable/stat_notify_chat"
+        android:title="레시피 게시판" />
+    <item
+        android:id="@+id/item_cook_fragment"
+        android:enabled="true"
+        android:icon="@android:drawable/stat_notify_chat"
+        android:title="요리 사진 게시판" />
+    <item
+        android:id="@+id/item_MyPage_fragment"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_my_calendar"
-        android:title="프로필" />
+        android:title="마이페이지" />
 
 </menu>
